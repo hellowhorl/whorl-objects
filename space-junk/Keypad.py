@@ -17,16 +17,20 @@ class Keypad(ItemSpec):
 
     def __str__(self):
         prev_code = Checkpoint.check_flag("last_code")
-        return f"The last code entered reads: {prev_code}"
+        return f"Last code entered: {prev_code}"
 
     def decode(self, code):
-        # TODO: Fix broken keypad
+        decoded = code * 3
+        decoded += 6
+        decoded /= 3
+        decoded -= self.entered
         return decoded
 
     def use(self):
         self.entered = int(input("Enter code: "))
         Checkpoint.set_flag('last_code', self.entered)
         if self.decode(self.entered) == 2.0:
+            Checkpoint.set_flag('keycode', True)
             for dir in os.listdir():
                 if os.path.isdir(dir) and dir.startswith("."):
                     os.rename(
