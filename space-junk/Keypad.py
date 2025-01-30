@@ -13,7 +13,6 @@ class Keypad(ItemSpec):
         super().__init__(__name__)
 
     def decode(self, code):
-        decoded = 0
         #
         # TODO: Fix the keypad according to the
         #       instructions left behind!
