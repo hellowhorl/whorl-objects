@@ -13,10 +13,10 @@ class Keypad(ItemSpec):
         super().__init__(__name__)
 
     def decode(self, code):
-        decoded = code * 3
-        decoded += 6
-        decoded /= 3
-        decoded -= code
+        #
+        # TODO: Fix the keypad according to the
+        #       instructions left behind!
+        #
         return decoded
 
     def use(self):
