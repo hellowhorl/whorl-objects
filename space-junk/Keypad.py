@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 import sys
 import narrator
@@ -13,23 +11,17 @@ class Keypad(ItemSpec):
 
     def __init__(self):
         super().__init__(__name__)
-        self.entered = None
-
-    def __str__(self):
-        prev_code = Checkpoint.check_flag("last_code")
-        return f"Last code entered: {prev_code}"
 
     def decode(self, code):
         decoded = code * 3
         decoded += 6
         decoded /= 3
-        decoded -= self.entered
+        decoded -= code
         return decoded
 
     def use(self):
-        self.entered = int(input("Enter code: "))
-        Checkpoint.set_flag('last_code', self.entered)
-        if self.decode(self.entered) == 2.0:
+        code_entered = int(input("Enter code: "))
+        if self.decode(code.entered) == 2.0:
             Checkpoint.set_flag('keycode', True)
             for dir in os.listdir():
                 if os.path.isdir(dir) and dir.startswith("."):
