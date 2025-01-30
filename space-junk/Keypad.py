@@ -19,9 +19,9 @@ class Keypad(ItemSpec):
         #
         return decoded
 
-    def use(self):
+        def use(self):
         code_entered = int(input("Enter code: "))
-        if self.decode(code.entered) == 2.0:
+        if self.decode(code_entered) == 2.0:
             Checkpoint.set_flag('keycode', True)
             for dir in os.listdir():
                 if os.path.isdir(dir) and dir.startswith("."):
@@ -31,5 +31,12 @@ class Keypad(ItemSpec):
                     )
 
 if __name__ == "__main__":
+    if not Checkpoint.check_flag('keycode'):
+        n = narrator.Narrator()
+        n.path.change({
+            "act": 0,
+            "scene": 1
+        })
+        n.narrate()
     keypad = Keypad()
     keypad.use()
