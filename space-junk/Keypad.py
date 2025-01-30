@@ -13,11 +13,12 @@ class Keypad(ItemSpec):
         super().__init__(__name__)
 
     def decode(self, code):
+        decoded = 0
         #
         # TODO: Fix the keypad according to the
         #       instructions left behind!
         #
-        return decoded
+        return decoded or None
 
     def use(self):
         code_entered = int(input("Enter code: "))
