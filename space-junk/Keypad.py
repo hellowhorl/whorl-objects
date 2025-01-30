@@ -13,13 +13,14 @@ class Keypad(ItemSpec):
         super().__init__(__name__)
 
     def decode(self, code):
+        decoded = 0
         #
         # TODO: Fix the keypad according to the
         #       instructions left behind!
         #
         return decoded
 
-        def use(self):
+    def use(self):
         code_entered = int(input("Enter code: "))
         if self.decode(code_entered) == 2.0:
             Checkpoint.set_flag('keycode', True)
