@@ -13,15 +13,18 @@ class Keypad(ItemSpec):
         super().__init__(__name__)
 
     def decode(self, code):
-        decoded = 0
         #
         # TODO: Fix the keypad according to the
         #       instructions left behind!
         #
-        return decoded or None
+        return code
 
     def use(self):
         code_entered = int(input("Enter code: "))
+        n.path.change({
+            "act": "keypad",
+            "scene": "fail"
+        })
         if self.decode(code_entered) == 2.0:
             Checkpoint.set_flag('keycode', True)
             for dir in os.listdir():
@@ -30,13 +33,18 @@ class Keypad(ItemSpec):
                         dir,
                         "".join(dir.split(".")[1:])
                     )
+            n.path.change({
+                "act": "keypad",
+                "scene": "success"
+            })
+        n.narrate()
 
 if __name__ == "__main__":
     if not Checkpoint.check_flag('keycode'):
         n = narrator.Narrator()
         n.path.change({
-            "act": 0,
-            "scene": 1
+            "act": "keypad",
+            "scene": "info"
         })
         n.narrate()
     keypad = Keypad()
